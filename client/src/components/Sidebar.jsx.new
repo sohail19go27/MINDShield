@@ -1,0 +1,122 @@
+import React from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { Drawer, useMediaQuery, Box } from '@mui/material'
+import { 
+  Star, Activity, BookOpen, Archive, Slash, Brain, PieChart, LayoutDashboard, Search,
+  Settings, User, Headphones, ShieldCheck
+} from 'lucide-react'
+
+function NavItem({ icon: Icon, label, to, badge, onClick }){
+  const navigate = useNavigate()
+  const location = useLocation()
+  const isActive = location.pathname === to
+
+  return (
+    <div 
+      onClick={() => { onClick?.() || navigate(to) }} 
+      className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors
+        ${isActive ? 'bg-sky-50 text-sky-600' : 'text-slate-600 hover:text-sky-600 hover:bg-sky-50'}`}
+    >
+      <Icon className="h-5 w-5 shrink-0" />
+      <span className="text-sm font-medium flex-1">{label}</span>
+      {badge && <span className="text-xs px-1.5 py-0.5 rounded bg-sky-100 text-sky-600">{badge}</span>}
+    </div>
+  )
+}
+
+export default function Sidebar({ open, onClose }) {
+  const mdUp = useMediaQuery((theme) => theme.breakpoints.up('md'))
+
+  const SidebarContent = (
+    <div className="h-full flex flex-col bg-white text-slate-900">
+      {/* Logo */}
+      <div className="p-6">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded bg-sky-100 flex items-center justify-center">
+            <ShieldCheck className="h-5 w-5 text-sky-600" />
+          </div>
+          <span className="font-semibold text-lg">MindShield</span>
+        </div>
+      </div>
+
+      {/* Search */}
+      <div className="px-3 mb-4">
+        <div className="relative">
+          <input 
+            placeholder="Search..." 
+            className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-3 py-2 text-sm placeholder:text-slate-400
+              focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500" 
+          />
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="flex-1 px-3 space-y-6 overflow-auto scrollbar-none">
+        {/* Dashboards */}
+        <div>
+          <div className="text-xs font-semibold text-slate-500 px-3 mb-2">Dashboards</div>
+          <nav className="space-y-1">
+            <NavItem icon={PieChart} label="Analytics" to="/analytics" />
+            <NavItem icon={LayoutDashboard} label="CRM" to="/crm" />
+          </nav>
+        </div>
+
+        {/* Pages */}
+        <div>
+          <div className="text-xs font-semibold text-slate-500 px-3 mb-2">Pages</div>
+          <nav className="space-y-1">
+            <NavItem icon={Star} label="Priorities" to="/priorities" />
+            <NavItem icon={BookOpen} label="Other Skills" to="/other-skills" />
+            <NavItem icon={Activity} label="Habits" to="/habits" />
+            <NavItem icon={Brain} label="Discipline" to="/discipline" />
+            <NavItem icon={Slash} label="Distraction" to="/distraction" />
+            <NavItem icon={Archive} label="Life Lessons" to="/life-lessons" />
+          </nav>
+        </div>
+
+        {/* Support */}
+        <div>
+          <div className="text-xs font-semibold text-slate-500 px-3 mb-2">Support</div>
+          <nav className="space-y-1">
+            <NavItem icon={Headphones} label="Help Center" to="/help" badge="Soon" />
+          </nav>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="p-3 border-t border-gray-100">
+        <nav className="space-y-1">
+          <NavItem icon={Settings} label="Settings" to="/settings" />
+          <NavItem icon={User} label="Profile" to="/profile" />
+        </nav>
+      </div>
+    </div>
+  )
+
+  // Desktop: Fixed sidebar
+  if (mdUp) {
+    return (
+      <Box className="fixed inset-y-0 left-0 w-64 border-r border-gray-200">
+        {SidebarContent}
+      </Box>
+    )
+  }
+
+  // Mobile: Drawer
+  return (
+    <Drawer
+      open={open}
+      onClose={onClose}
+      PaperProps={{
+        sx: {
+          width: 280,
+          backgroundColor: 'transparent',
+          backgroundImage: 'none',
+        }
+      }}
+    >
+      {SidebarContent}
+    </Drawer>
+  )
+}

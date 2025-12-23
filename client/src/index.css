@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ms-bg: #071022;
+    --ms-sidebar-gradient-start: rgba(56,189,248,0.06);
+    --ms-sidebar-gradient-end: rgba(59,130,246,0.03);
+    --ms-sidebar-border: rgba(15,23,42,0.06);
+    --ms-sidebar-shadow: rgba(2,6,23,0.04);
+    
+    --ms-topbar-light-bg: rgba(255,255,255,0.8);
+    --ms-topbar-light-bg-2: rgba(255,255,255,0.7);
+    --ms-topbar-dark-bg: rgba(8,18,32,0.6);
+    --ms-topbar-dark-bg-2: rgba(6,10,20,0.5);
+    
+    --ms-content-border: rgba(56,189,248,0.12);
+    --ms-content-border-2: rgba(167,139,250,0.08);
+    --ms-content-border-3: rgba(52,211,153,0.08);
+    
+    --ms-transition-speed: 0.18s;
+    --ms-scale-speed: 0.12s;
+    --ms-blur-amount: 6px;
+    
+    /* Content card styling */
+    --ms-card-border: rgba(56,189,248,0.15);
+    --ms-card-border-2: rgba(167,139,250,0.12);
+    --ms-card-bg-light: rgba(255,255,255,0.03);
+    --ms-card-bg-dark: rgba(15,23,42,0.4);
+    --ms-card-hover-shadow: rgba(2,6,23,0.12);
+
+    /* Form and button styling */
+    --ms-button-bg: rgba(56,189,248,0.15);
+    --ms-button-hover: rgba(56,189,248,0.25);
+    --ms-input-border: rgba(148,163,184,0.1);
+    --ms-input-bg: rgba(255,255,255,0.05);
+
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+ 
+    --radius: 0.5rem;
+  }
+}
+
+body {
+  /* Light mode (default) */
+  background-color: #ffffff;
+  color: #0f172a; /* slate-900 */
+  min-height: 100vh;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Dark mode overrides - activated by adding `dark` class to documentElement */
+.dark body {
+  background: linear-gradient(180deg,#0f172a 0%, #071020 100%);
+  color: #e6eef8; /* slate-100-ish */
+}
+
+.ms-card-hover {
+  transition: all var(--ms-transition-speed) ease;
+}
+.ms-card-hover:hover {
+  transform: translateY(-6px);
+  border-color: var(--ms-card-border);
+  box-shadow: 0 6px 18px var(--ms-card-hover-shadow);
+}
+
+/* motion-safe subtle fade/slide utilities */
+@media (prefers-reduced-motion: no-preference) {
+  .ms-fade-in {
+    opacity: 0;
+    transform: translateY(4px);
+    animation: ms-fade-in .28s ease-out forwards;
+  }
+  .ms-fade-in-slow {
+    opacity: 0;
+    transform: translateY(6px);
+    animation: ms-fade-in .45s ease-out forwards;
+  }
+  .ms-scale-hover {
+    transition: all var(--ms-scale-speed) ease;
+  }
+  .ms-scale-hover:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+@keyframes ms-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ms-points-pop {
+  0% { transform: translateY(6px); opacity: 0; }
+  20% { transform: translateY(-4px); opacity: 1; }
+  80% { transform: translateY(-12px); opacity: 1; }
+  100% { transform: translateY(-16px); opacity: 0; }
+}
+
+.ms-points-toast {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  background: #22c55e;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  animation: ms-points-pop 1.3s ease-out forwards;
+  pointer-events: none;
+}
+
+/* Light mode glass/card */
+.ms-glass {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(15,23,42,0.06);
+  backdrop-filter: none;
+  color: inherit;
+}
+
+/* Dark mode glass/card */
+.dark .ms-glass {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+  color: inherit;
+}
+
+/* interactive rings for buttons/inputs (opt-in classes) */
+.ms-focus-ring {
+  transition: all var(--ms-transition-speed) ease;
+}
+.ms-focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ms-button-bg);
+}
+
+/* gradient text helper */
+.ms-gradient-text {
+  background: linear-gradient(90deg, #38bdf8, #a78bfa, #34d399);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Sidebar visual enhancement */
+.ms-sidebar-enhanced {
+  background: linear-gradient(180deg, rgba(56,189,248,0.06), rgba(59,130,246,0.03));
+  border-right: 1px solid rgba(15,23,42,0.06);
+  box-shadow: 2px 0 12px rgba(2,6,23,0.04);
+}
+
+/* Topbar visual enhancement */
+.ms-topbar-enhanced {
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.7));
+  border-bottom: 1px solid rgba(15,23,42,0.06);
+  box-shadow: 0 2px 10px rgba(2,6,23,0.04);
+}
+.dark .ms-topbar-enhanced {
+  background: linear-gradient(180deg, rgba(8,18,32,0.6), rgba(6,10,20,0.5));
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Ensure internal cards keep their own hover elevation */
+.ms-card-hover { transition: transform var(--ms-transition-speed) ease, box-shadow var(--ms-transition-speed) ease; }
+
