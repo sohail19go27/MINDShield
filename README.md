@@ -13,20 +13,27 @@ How to run (Windows / PowerShell):
 
 
 cd c:\project\MindShied\server
+
 npm install
+
 npm run dev
 
 # ML_Service
 cd C:\project\MindShied\server\ml_service
+
 python -m venv venv
 venv\Scripts\activate
+
 pip install -r requirements.txt
+
 python app.py
 
 ## Client
 
 cd c:\project\MindShied\client
+
 npm install
+
 npm run dev
 
 Open [http://localhost:5173](http://localhost:5173) (Vite) and the landing page will appear. Search will navigate to `/dashboard` and load cards from server.
