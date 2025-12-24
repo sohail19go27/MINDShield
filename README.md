@@ -1,4 +1,4 @@
-# MINDShield — MERN UI Starter
+# MINDShield — AI Powered Digital Discipline App
 
 This scaffold implements a minimal MERN-style starter focused on the UI you requested:
 
@@ -16,6 +16,12 @@ cd c:\project\MindShied\server
 npm install
 npm run dev
 
+# ML_Service
+cd C:\project\MindShied\server\ml_service
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
 
 ## Client
 
