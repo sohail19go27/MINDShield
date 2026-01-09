@@ -44,3 +44,6 @@ Next steps:
 - Add authentication (JWT)
 - Improve UI with icons, animations, and a layout closer to the Shadboard repo
 - Add detail pages for each section and CRUD
+
+
+## Backend
