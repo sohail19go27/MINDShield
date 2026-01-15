@@ -1,4 +1,4 @@
-# MINDShield — AI Powered Digital Discipline App
+# MINDShield — AI Digital Discipline App
 
 This scaffold implements a minimal MERN-style starter focused on the UI you requested:
 
