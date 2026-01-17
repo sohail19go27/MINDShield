@@ -11,7 +11,6 @@ How to run (Windows / PowerShell):
 
 ## Server
 
-
 cd c:\project\MindShied\server
 
 npm install
@@ -22,6 +21,7 @@ npm run dev
 cd C:\project\MindShied\server\ml_service
 
 python -m venv venv
+
 venv\Scripts\activate
 
 pip install -r requirements.txt
